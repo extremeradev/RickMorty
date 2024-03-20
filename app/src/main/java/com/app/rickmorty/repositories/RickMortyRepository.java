@@ -38,21 +38,18 @@ public class RickMortyRepository {
         return data;
     }
 
-    public LiveData<CharacterModel> getCharacterByID(int id){
-        MutableLiveData<CharacterModel> data = new MutableLiveData<>();
-        apiService.getCharacterByID(id).enqueue(new Callback<CharacterModel>() {
+    public LiveData<ResponseModel> getNextPage(int num){
+        MutableLiveData<ResponseModel> data = new MutableLiveData<>();
+        apiService.getNextPage(num).enqueue(new Callback<ResponseModel>() {
             @Override
-            public void onResponse(Call<CharacterModel> call, Response<CharacterModel> response) {
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if(response.isSuccessful()){
-                    if(data.getValue().getId() == id){
-                        data.setValue(response.body());
-                    }
-
+                    data.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<CharacterModel> call, Throwable t) {
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
                 data.setValue(null);
             }
 

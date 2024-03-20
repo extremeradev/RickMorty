@@ -18,8 +18,8 @@ public class CharacterViewModel extends ViewModel {
         return charactersRepository.getCharacters();
     }
 
-    public LiveData<CharacterModel> getCharacterByID(int id){
-        return charactersRepository.getCharacterByID(id);
+    public LiveData<ResponseModel> getNextPage(int num){
+        return charactersRepository.getNextPage(num);
     }
 
 }

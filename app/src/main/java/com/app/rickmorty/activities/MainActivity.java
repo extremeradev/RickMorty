@@ -1,6 +1,8 @@
 package com.app.rickmorty.activities;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private CharacterViewModel viewModel;
     private List<CharacterModel> charactersList = new ArrayList<>();
     private CharacterAdapter characterAdapter;
+    private int actualPage = 1;
 
 
 
@@ -30,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         doInitialization();
-
 
     }
 
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
             });
             fragmentCharacterListBinding.characterRecyclerView.setAdapter(characterAdapter);
             getCharacters();
+            fragmentCharacterListBinding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    actualPage++;
+                    getNextPage(actualPage);
+                }
+            });
         }
 
     }
@@ -58,11 +67,13 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCharactersRickMorty().observe(this, characters -> {
             if ( characters != null){
                 if(characters.getResults() != null){
-                    charactersList.addAll(characters.getResults());
-                    characterAdapter.notifyDataSetChanged();
+                    if(characters.getInfo().getPages() <= 42){
+                        charactersList.addAll(characters.getResults());
+                        characterAdapter.notifyDataSetChanged();
+                    }
+
                 }
             }
-
         });
 
     }
@@ -77,6 +88,25 @@ public class MainActivity extends AppCompatActivity {
                     .addToBackStack("")
                     .setReorderingAllowed(true)
                     .commit();
+        }
+
+    }
+
+    public void getNextPage(int num){
+        if(num <= 42){
+            viewModel.getNextPage(num).observe(this, characters -> {
+                if ( characters != null){
+                    if(characters.getResults() != null){
+                        charactersList.clear();
+                        charactersList.addAll(characters.getResults());
+                        characterAdapter.notifyDataSetChanged();
+                    }
+                }
+
+            });
+        } else {
+            actualPage = 1;
+            getNextPage(actualPage);
         }
 
     }
