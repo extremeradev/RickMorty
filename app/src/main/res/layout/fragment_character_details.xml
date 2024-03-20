@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+    <data>
+        <variable
+            name="character"
+            type="com.app.rickmorty.model.CharacterModel" />
+        <variable
+            name="location"
+            type="com.app.rickmorty.model.LocationModel" />
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.CharacterDetailsFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/cardview_dark_background"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+             />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:cardBackgroundColor="#fffffe91"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            tools:ignore="MissingConstraints"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imgCharacterDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.5"
+                    android:imageURL="@{character.image}">
+
+                </com.makeramen.roundedimageview.RoundedImageView>
+
+                <TextView
+                    android:id="@+id/lblNameCharacterDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{character.name}"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lblGeneroCharacterDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{character.gender}"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/lblStatusCharacterDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{character.status}"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/lblCreatedCharacterDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{character.created}"
+                        android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/lblSpecieCharacterDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{character.species}"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/lblUrlCharacterDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{character.url}"
+                    android:textSize="14dp"
+                    android:textColor="#3F51B5"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+</layout>

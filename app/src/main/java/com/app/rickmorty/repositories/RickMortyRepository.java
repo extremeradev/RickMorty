@@ -3,6 +3,7 @@ package com.app.rickmorty.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.app.rickmorty.model.CharacterModel;
 import com.app.rickmorty.model.ResponseModel;
 import com.app.rickmorty.network.ApiClient;
 import com.app.rickmorty.network.ApiService;
@@ -30,6 +31,28 @@ public class RickMortyRepository {
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
+                data.setValue(null);
+            }
+
+        });
+        return data;
+    }
+
+    public LiveData<CharacterModel> getCharacterByID(int id){
+        MutableLiveData<CharacterModel> data = new MutableLiveData<>();
+        apiService.getCharacterByID(id).enqueue(new Callback<CharacterModel>() {
+            @Override
+            public void onResponse(Call<CharacterModel> call, Response<CharacterModel> response) {
+                if(response.isSuccessful()){
+                    if(data.getValue().getId() == id){
+                        data.setValue(response.body());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CharacterModel> call, Throwable t) {
                 data.setValue(null);
             }
 
