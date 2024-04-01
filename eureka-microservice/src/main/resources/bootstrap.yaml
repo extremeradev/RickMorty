@@ -1,6 +1,6 @@
 spring:
   application:
-    name: favoritos-microservice
+    name: eureka-microservice
   cloud:
     config:
       enabled: true
