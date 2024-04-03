@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "favoritos-microservice", url = "http://localhost:8002", path = "/fav")
+@FeignClient(name = "favoritos-microservice")
 public interface FavFeignClient {
 
     @PostMapping()
