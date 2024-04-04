@@ -56,6 +56,7 @@ public class UserService {
             return result;
         } else {
             result.put("USER", user);
+
             List<Favorito> favs = favFeignClient.getFavs(userId);
             if (favs ==  null) {
                 result.put("Favoritos", "ese user no tiene favoritos");
